@@ -13,7 +13,7 @@
         />
 
         <q-toolbar-title>
-          Senapel SA
+          DigiPress Partenaires
         </q-toolbar-title>
 
         <q-btn icon="mdi-account" flat outline class="text-weight-light" to="/client">Mon compte </q-btn>
@@ -21,8 +21,8 @@
     </q-header>
     <q-footer elevated>
       <q-toolbar>
-        <q-toolbar-title class="text-left text-weight-thin" @click="showDialog">@Copyright Senapel SA</q-toolbar-title>
-        <q-toolbar-title class="text-rifht text-weight-thin" @click="showDialog">Contact +221 77 330 08 53, email contact@senapel.com</q-toolbar-title>
+        <q-toolbar-title class="text-left text-weight-thin" @click="showDialog">@Copyright DigiPress SA</q-toolbar-title>
+        <q-toolbar-title class="text-rifht text-weight-thin" @click="showDialog">Contact +221 77 330 08 53, email contact@digipress.sn</q-toolbar-title>
       </q-toolbar>
     </q-footer>
     <q-drawer
@@ -38,7 +38,7 @@
           alt="Quasar logo"
           src="~assets/logo_Senapel.svg"
           style="width: 50px; height: 50px"
-        > <span class="text-weight-bolder">Senapel</span>
+        > <span class="text-weight-bolder">Digi Press Partenaires</span>
 
       </q-item-label>
 
@@ -92,39 +92,39 @@ let moisActuel = moment().format('M')
 let anneeActuel = moment().format('Y')
 const linksList = [
   {
-    title: 'Aujourd\'hui',
+    title: 'Ventes',
     caption: 'quasar.dev',
     icon: 'ion-calendar',
     link: '/parution/${today}/dans/soleil',
     open: true,
     subItems:[
       {
-        title: 'Parus dans le Soleil',
-        caption: 'Les appels d\'offre',
+        title: 'Ventes Aujourd\'hui',
+        caption: 'Les achats de parution',
         icon: 'mdi-calendar',
         link: `/parution/${today}/dans/soleil`,
       },{
-        title: 'Les appels',
+        title: 'Ventes du semaine',
         caption: 'Les appels d\'offre',
         icon: 'book',
         link: `/appels/${today}`,
       },
       {
-        title: "Avis d'attribution",
-        caption: 'Les avis d\'attribution',
+        title: "Rapports mensuels",
+        caption: 'Rapport détaillé de votre journal',
         icon: 'ion-trophy',
         link: '/avis/'+today,
       },
       {
-        title: 'La Une des journaux',
-        caption: 'La une des journaux',
+        title: 'Les stats',
+        caption: 'Stats de vos articles',
         icon: 'mdi-newspaper',
         link: '/la_une',
       },
     ]
   },
   {
-    title: 'Archives',
+    title: 'Transactions',
     open: false,
     caption: 'les archives',
     icon: 'archive',
@@ -138,7 +138,7 @@ const linksList = [
       }]
   },
   {
-    title: 'Services SENAC SA',
+    title: 'Utilisateurs',
     caption: 'forum.quasar.dev',
     icon: 'mdi-account',
     link: '/offres_senac',
