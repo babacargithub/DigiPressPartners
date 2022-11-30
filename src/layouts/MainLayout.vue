@@ -95,25 +95,20 @@ const linksList = [
     title: 'Ventes',
     caption: 'quasar.dev',
     icon: 'ion-calendar',
-    link: '/parution/${today}/dans/soleil',
+    link: '/sales/${today}/partner/1',
     open: true,
     subItems:[
       {
         title: 'Ventes Aujourd\'hui',
         caption: 'Les achats de parution',
         icon: 'mdi-calendar',
-        link: `/parution/${today}/dans/soleil`,
-      },{
-        title: 'Ventes du semaine',
-        caption: 'Les appels d\'offre',
-        icon: 'book',
-        link: `/appels/${today}`,
+        link: 'ventes_du_jour',
       },
       {
         title: "Rapports mensuels",
         caption: 'Rapport détaillé de votre journal',
         icon: 'ion-trophy',
-        link: '/avis/'+today,
+        link: '/rapports',
       },
       {
         title: 'Les stats',
@@ -131,29 +126,29 @@ const linksList = [
     link: '/archive',
     subItems:[
       {
-        title: 'Archives',
+        title: 'Faire un retrait',
         caption: null,
         icon: 'list',
         link: `/archives/mois/${moisActuel}/annee/${anneeActuel}`,
       }]
   },
   {
-    title: 'Utilisateurs',
+    title: 'Paramètres',
     caption: 'forum.quasar.dev',
-    icon: 'mdi-account',
+    icon: 'mdi-cog',
     link: '/offres_senac',
     open: false,
     subItems: [
       {
-        title: 'Les offres de SENAC SA',
+        title: 'Gestion des utilisateurs',
         caption: 'Détails des offres',
-        icon: 'mdi-cart',
+        icon: 'mdi-user',
         link: '/offres_senac',
       },
       {
-        title: 'Contacts Senac',
-        caption: 'contacter SENAC',
-        icon: 'mdi-phone',
+        title: 'Gestion du compte',
+        caption: '',
+        icon: 'mdi-account',
         link: '/contact_senac',
       },
     ]

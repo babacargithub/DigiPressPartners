@@ -9,6 +9,12 @@ const routes = [
       },
       {
         path: 'login', component: () => import('pages/users/Login.vue'),
+      },
+      {
+        path: 'ventes_du_jour', component: () => import('pages/ventes/VenteDuJour.vue'),
+      },
+      {
+        path: 'rapports', component: () => import('pages/ventes/RapportMensuel.vue'),
       }
 
     ]
