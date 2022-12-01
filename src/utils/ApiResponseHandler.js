@@ -5,7 +5,7 @@ export  default  class ApiResponseHandler {
     // error = null
     constructor(response) {
         try {
-            this.statusCode = response.status
+            this.statusCode =response.status
             this.data = response.data
             this.response = response
         } catch (e) {
@@ -17,7 +17,7 @@ export  default  class ApiResponseHandler {
     }
     isSuccessfulLogin(){
         // return this.statusCode === 200
-        return this.statusCode === 200 && typeof this.getData().token !== 'undefined' && this.getData().token !== null
+        return this.statusCode === 200 && typeof this.getData().plainTextToken !== 'undefined'
     }
     isSuccessCreated(){
         return this.statusCode === 201
@@ -87,11 +87,12 @@ export  default  class ApiResponseHandler {
         // eslint-disable-next-line no-prototype-builtins
         if (this.data.hasOwnProperty("hydra:member")){
             return this.data["hydra:member"]
-        }else{
+        } else{
             return this.data;
         }
     }
-    data(){ return getData()
+    data(){
+      return this.getData()
     }
     getResponseErrorMessage(){
         if (this.isInternalServerError()){

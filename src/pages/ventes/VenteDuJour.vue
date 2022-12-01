@@ -27,8 +27,8 @@ export default {
     return {
        columns : [
         { name: 'abonne_id', align: 'center', label: 'Abonné', field: 'abonne_id', sortable: true },
-        { name: 'prix', align: 'center', label: 'Calories', field: 'prix', sortable: true },
-        { name: 'commission_journal', align: 'center', label: 'Calories', field: 'commission_journal', sortable: true },
+        { name: 'prix', align: 'center', label: 'Prix', field: 'prix', sortable: true },
+        { name: 'commission_journal', align: 'center', label: 'Commission', field: 'commission_journal', sortable: true },
         { name: 'methode_paiement', label: 'Acheté par', field: 'methode_paiement', sortable: true },
         { name: 'created_at', label: 'Date', field: 'created_at' },
         ],
@@ -42,7 +42,7 @@ export default {
     }
   },
   mounted(){
-    this.$axios.get('/').then(r=>{
+    this.$axios.get('ventes').then(r=>{
       console.log(r)
       this.ventes = r.getData().data
       }

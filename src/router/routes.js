@@ -15,6 +15,12 @@ const routes = [
       },
       {
         path: 'rapports', component: () => import('pages/ventes/RapportMensuel.vue'),
+      },
+      {
+        path: 'parutions', component: () => import('pages/parutions/ParutionsDuMois.vue'),
+      },
+      {
+        path: 'retrait', component: () => import('pages/compte/Retrait.vue'),
       }
 
     ]

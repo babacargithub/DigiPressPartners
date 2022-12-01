@@ -8,7 +8,7 @@
           round
           icon="menu"
           aria-label="Menu"
-          v-if=" ! $q.platform.is.electron"
+          v-if=" ! $q.platform.is.electron && isLoggedIn"
           @click="toggleLeftDrawer"
         />
 
@@ -16,7 +16,6 @@
           DigiPress Partenaires
         </q-toolbar-title>
 
-        <q-btn icon="mdi-account" flat outline class="text-weight-light" to="/client">Mon compte </q-btn>
       </q-toolbar>
     </q-header>
     <q-footer elevated>
@@ -29,6 +28,7 @@
       v-model="leftDrawerOpen"
       show-if-above
       bordered
+      v-if="isLoggedIn"
     >
       <q-item-label
         header
@@ -94,42 +94,42 @@ const linksList = [
   {
     title: 'Ventes',
     caption: 'quasar.dev',
-    icon: 'ion-calendar',
+    icon: 'mdi-wallet',
     link: '/sales/${today}/partner/1',
     open: true,
     subItems:[
       {
         title: 'Ventes Aujourd\'hui',
         caption: 'Les achats de parution',
-        icon: 'mdi-calendar',
+        icon: 'mdi-hand-coin',
         link: 'ventes_du_jour',
       },
       {
         title: "Rapports mensuels",
-        caption: 'Rapport détaillé de votre journal',
-        icon: 'ion-trophy',
+        caption: 'Rapport détaillé de vos finances',
+        icon: 'mdi-finance',
         link: '/rapports',
       },
       {
-        title: 'Les stats',
-        caption: 'Stats de vos articles',
+        title: 'Parutions',
+        caption: 'Vos parutions',
         icon: 'mdi-newspaper',
-        link: '/la_une',
+        link: '/parutions',
       },
     ]
   },
   {
     title: 'Transactions',
     open: false,
-    caption: 'les archives',
-    icon: 'archive',
-    link: '/archive',
+    caption: 'Opérations',
+    icon: 'mdi-cash-multiple',
+    link: '/retrait',
     subItems:[
       {
         title: 'Faire un retrait',
         caption: null,
-        icon: 'list',
-        link: `/archives/mois/${moisActuel}/annee/${anneeActuel}`,
+        icon: 'wallet',
+        link: `/retrait`,
       }]
   },
   {

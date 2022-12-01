@@ -10,17 +10,32 @@ import loginCredentials from "src/repository/LoginCredentials";
 // good idea to move this instance creation inside of the
 // "export default () => {}" function below (which runs individually
 // for each client)
-const api = axios.create({ baseURL: 'https://admin.senapel.com/api/' })
 
-export default boot(({ app, store}) => {
+export const BASE_URL =  process.env.NODE_ENV === "development" ? "http://localhost:8888/DigiPress/DigiPressBackend/public/" : "https://backend.digipress.sn"
+const api = axios.create({ baseURL: 'https://admin.senapel.com/api/' })
+export let partnersConfig = {
+  // baseURL: process.env.NODE_ENV === "development"?'http://localhost/senapel/public/api/':'https://golobone.net/go_travel_v4/public/api/'
+  baseURL: BASE_URL+'partners/'
+  // baseURL: process.env.NODE_ENV === "development"?'http://Localhost/GO_SYS_V4/public/api/':'http://192.168.1.17/GO_SYS_V4/public/api/'
+  // timeout: 60 * 1000, // Timeout
+};
+export let apiConfig = {
+  // baseURL: process.env.NODE_ENV === "development"?'http://localhost/senapel/public/api/':'https://golobone.net/go_travel_v4/public/api/'
+  baseURL: BASE_URL+'api'
+  // baseURL: process.env.NODE_ENV === "development"?'http://Localhost/GO_SYS_V4/public/api/':'http://192.168.1.17/GO_SYS_V4/public/api/'
+  // timeout: 60 * 1000, // Timeout
+};
+export let backendWeb = {
+  // baseURL: process.env.NODE_ENV === "development"?'http://localhost/senapel/public/api/':'https://golobone.net/go_travel_v4/public/api/'
+  baseURL: BASE_URL
+  // baseURL: process.env.NODE_ENV === "development"?'http://Localhost/GO_SYS_V4/public/api/':'http://192.168.1.17/GO_SYS_V4/public/api/'
+  // timeout: 60 * 1000, // Timeout
+};
+export default boot(({ app, store, router}) => {
   // for use inside Vue files (Options API) through this.$axios and this.$api
-  let config = {
-    // baseURL: process.env.NODE_ENV === "development"?'http://localhost/senapel/public/api/':'https://golobone.net/go_travel_v4/public/api/'
-    baseURL: process.env.NODE_ENV === "development"?'http://localhost:8888/DigiPress/DigiPressBackend/public/partners':'https://partners.digipress.sn/api/'
-    // baseURL: process.env.NODE_ENV === "development"?'http://Localhost/GO_SYS_V4/public/api/':'http://192.168.1.17/GO_SYS_V4/public/api/'
-    // timeout: 60 * 1000, // Timeout
-  };
-  let _axios = axios.create(config);
+
+  let _axios = axios.create(partnersConfig);
+
   const actionScope = `loader`;
   let requestsPending = 0;
 
@@ -50,7 +65,7 @@ export default boot(({ app, store}) => {
       }
 
       config.headers = {
-        // 'Authorization': `Bearer ${store.state.user_login.user.token}`,
+        'Authorization': `Bearer ${store.state.user_login.user.token}`,
         'Accept':'application/json',
         'Content-Type':'application/json',
       }
@@ -72,6 +87,7 @@ export default boot(({ app, store}) => {
       req.done();
       error.response = new ApiResponseHandler(error.response)
       if (error.response.isUnauthorized()){
+        router.push('/login')
       }else if(error.response.isInternalServerError()) {
         store.dispatch(`${actionScope}/showErrorOccurred`);
 
@@ -80,6 +96,7 @@ export default boot(({ app, store}) => {
       return Promise.reject(error.response);
     }
   );
+  _axios.defaults.withCredentials = true;
 
   app.config.globalProperties.$axios = _axios
   // ^ ^ ^ this will allow you to use this.$axios (for Vue Options API form)

@@ -1,72 +1,72 @@
 export const user_login = {
-    namespaced: true,
-    state: {
-        isLoggedIn: false,
-        customer: null,
-        user: {
-            token: null,
-            tokenExpiresAt: null,
-            username:'',
-            shouldSignup: true,
-            isAuthenticated: false
+  namespaced: true,
+  state: {
+    isLoggedIn: false,
+    shouldChangePassword: false,
+    user: {
+      id:null,
+      isAdmin: false,
+      isSuperAdmin: false,
+      isCEO: true,
+      token: null,
+      username:'',
+      balance: null,
+      roles: []
+    }},
+  actions: {
+    saveUserCredentials({ commit }, data) {
 
+      let token =  data.token
+      let username =  data.username
+      let balance =  null
+      let id =  data.id
+      // let shouldChangePassword =  data.user.shouldChangePassword
+      commit('mutateToken',token)
+      commit('mutateUsername',username)
+      commit('mutateId', id)
 
-        }},
-    actions: {
-        saveLoginCredentials({ commit }, tokenData) {
-            commit('mutateToken',tokenData.token)
-            commit('mutateTokenExpiresAt',tokenData.expires_at)
-        },
-        saveCustomerInfo({ commit }, customer) {
-            commit('mutateCustomerInfo',customer)
-        },
-        loginUser({ commit }) {
-            commit("markAsLoggedIn");
-        },
-        logoutUser({ commit }) {
-            commit("markAsLoggedOut");
-        }
 
     },
-    mutations: {
-        markAsLoggedIn(state) {
-            state.isLoggedIn = true;
-            state.user.isAuthenticated = true;
-        },
-        markAsLoggedOut(state) {
-            state.isLoggedIn = false;
-            state.user.isAuthenticated = false;
-
-        },
-        mutateToken(state, token) {
-            state.user.token = token;
-        },
-        mutateCustomerInfo(state, customerInfo) {
-            state.user.shouldSignup = false
-            state.customer = customerInfo;
-        },
-        mutateTokenExpiresAt(state, expiresAt) {
-            state.user.tokenExpiresAt = expiresAt;
-        }
-
+    loginUser({ commit }) {
+      commit("markAsLoggedIn");
     },
-    getters:{
-        shouldFetchToken: (state, getters)=>{
-            if( state.user.token == null){
-                return true
-            } else{
-                    if(getters.isTokenExpired){
-                        return true
-                        }
-            }
-            return false
+    logoutUser({ commit }) {
+      commit("markAsLoggedOut");
+      commit("mutateShouldChangePassword", false);
 
-        },
-        isTokenExpired: state =>{
-            let expiresAt = new Date(state.user.tokenExpiresAt)
-            let now = new Date();
-            return expiresAt < now
-        }
+    }, changePassword({ commit }, data) {
+      commit("mutateShouldChangePassword",true);
+      commit("mutateId",data.user.id);
+      commit("mutateToken",data.token);
     }
+
+  },
+  mutations: {
+    markAsLoggedIn(state) {
+      state.isLoggedIn = true;
+    },
+
+    markAsLoggedOut(state) {
+      state.isLoggedIn = false;
+    },
+    mutateToken(state, token) {
+      state.user.token = token;
+    },mutateUsername(state, username) {
+      state.user.username = username;
+    },mutateBalance(state, balance) {
+      state.user.balance = balance;
+    },mutateRoles(state, roles) {
+      state.user.roles = roles;
+    },mutateId(state, id) {
+      state.user.id = id;
+    }, mutateShouldChangePassword(state, bool) {
+      state.shouldChangePassword = bool;
+    },
+
+  },
+  getters:{
+
+
+  }
 };
 

@@ -4,12 +4,13 @@ import loginCredentials from "src/repository/LoginCredentials";
 import Acheter from "pages/paiements/Acheter.vue";
 // "async" is optional;
 // more info on params: https://v2.quasar.dev/quasar-cli/boot-files
-export default boot( ( { app} ) => {
+export default boot( ( { app, store} ) => {
   // something to do
   app.mixin({
     data() {
       return {
-        isConnected: loginCredentials.isConnected()
+        isConnected: true,
+        isLoggedIn: true
       };
     },
     methods: {
