@@ -21,6 +21,12 @@ const routes = [
       },
       {
         path: 'retrait', component: () => import('pages/compte/Retrait.vue'),
+      },
+      {
+        path: 'historique-retraits', component: () => import('pages/compte/HistoriqueRetrait.vue'),
+      },
+      {
+        path: 'compte', component: () => import('pages/users/AfficherClient.vue'),
       }
 
     ]

@@ -1,6 +1,6 @@
 <template>
-  <div class="row q-mt-lg">
-    <div class="col-6 offset-3">
+  <div class="row q-mt-lg q-ma-xs-md q-pa-xs-md">
+    <div class="col-md-6 col-xs-12 offset-md-3">
       <q-card>
         <q-card-section>
           <p class="text-weight-bolder">Se connecter</p>
@@ -84,10 +84,10 @@ export default defineComponent({
         .then(response=>{
           if (response.isSuccessfulLogin()) {
             let data = response.getData()
-            let user = {id: "123", username: "username", token: data.plainTextToken}
-            console.log(user)
+            let user = {id: "null",  username: "username", token: data.plainTextToken}
             this.$store.dispatch('user_login/saveUserCredentials', user )
             this.$store.dispatch("user_login/loginUser")
+            loginCredentials.setAsLoggedIn();
 
             this.$router.push("/");
           }else {

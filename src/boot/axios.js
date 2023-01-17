@@ -11,7 +11,7 @@ import loginCredentials from "src/repository/LoginCredentials";
 // "export default () => {}" function below (which runs individually
 // for each client)
 
-export const BASE_URL =  process.env.NODE_ENV === "development" ? "http://localhost:8888/DigiPress/DigiPressBackend/public/" : "https://backend.digipress.sn"
+export const BASE_URL =  process.env.NODE_ENV === "development" ? "http://localhost:8888/DigiPress/DigiPressBackend/public/" : "https://digipress.golobone.net/"
 const api = axios.create({ baseURL: 'https://admin.senapel.com/api/' })
 export let partnersConfig = {
   // baseURL: process.env.NODE_ENV === "development"?'http://localhost/senapel/public/api/':'https://golobone.net/go_travel_v4/public/api/'
@@ -87,6 +87,7 @@ export default boot(({ app, store, router}) => {
       req.done();
       error.response = new ApiResponseHandler(error.response)
       if (error.response.isUnauthorized()){
+        loginCredentials.logout()
         router.push('/login')
       }else if(error.response.isInternalServerError()) {
         store.dispatch(`${actionScope}/showErrorOccurred`);

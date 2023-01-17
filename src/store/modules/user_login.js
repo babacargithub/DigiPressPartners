@@ -1,3 +1,5 @@
+import {LocalStorage} from "quasar";
+
 export const user_login = {
   namespaced: true,
   state: {
@@ -18,7 +20,6 @@ export const user_login = {
 
       let token =  data.token
       let username =  data.username
-      let balance =  null
       let id =  data.id
       // let shouldChangePassword =  data.user.shouldChangePassword
       commit('mutateToken',token)
@@ -44,6 +45,7 @@ export const user_login = {
   mutations: {
     markAsLoggedIn(state) {
       state.isLoggedIn = true;
+      localStorage.setItem("isLoggedIn","0")
     },
 
     markAsLoggedOut(state) {
@@ -51,6 +53,7 @@ export const user_login = {
     },
     mutateToken(state, token) {
       state.user.token = token;
+      localStorage.setItem("token", token)
     },mutateUsername(state, username) {
       state.user.username = username;
     },mutateBalance(state, balance) {

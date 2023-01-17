@@ -14,17 +14,13 @@
 
         <q-toolbar-title>
           DigiPress Partenaires
+
         </q-toolbar-title>
+        Solde : <span class="text-white title-big ">{{solde.toLocaleString()}}</span>
 
       </q-toolbar>
     </q-header>
-    <q-footer elevated>
-      <q-toolbar>
-        <q-toolbar-title class="text-left text-weight-thin" @click="showDialog">@Copyright DigiPress SA</q-toolbar-title>
-        <q-toolbar-title class="text-rifht text-weight-thin" @click="showDialog">Contact +221 77 330 08 53, email contact@digipress.sn</q-toolbar-title>
-      </q-toolbar>
-    </q-footer>
-    <q-drawer
+   <q-drawer
       v-model="leftDrawerOpen"
       show-if-above
       bordered
@@ -36,9 +32,10 @@
 
         <img
           alt="Quasar logo"
-          src="~assets/logo_Senapel.svg"
+          src="~assets/logo_digipress.png"
           style="width: 50px; height: 50px"
-        > <span class="text-weight-bolder">Digi Press Partenaires</span>
+        >
+        <span class="text-weight-bolder">Digi Press Partenaires</span>
 
       </q-item-label>
 
@@ -74,6 +71,13 @@
           </q-card>
         </q-expansion-item>
       </template> </q-drawer>
+
+    <q-footer elevated>
+      <q-toolbar>
+        <q-toolbar-title class="text-left text-weight-thin" @click="showDialog">@Copyright DigiPress SA</q-toolbar-title>
+        <q-toolbar-title class="text-rifht text-weight-thin" @click="showDialog">Contact +221 77 330 08 53, email contact@digipress.sn</q-toolbar-title>
+      </q-toolbar>
+    </q-footer>
 
     <q-page-container >
 
@@ -111,8 +115,8 @@ const linksList = [
         link: '/rapports',
       },
       {
-        title: 'Parutions',
-        caption: 'Vos parutions',
+        title: 'Nos Unes',
+        caption: 'Vue détaillée de vos parutions',
         icon: 'mdi-newspaper',
         link: '/parutions',
       },
@@ -130,28 +134,36 @@ const linksList = [
         caption: null,
         icon: 'wallet',
         link: `/retrait`,
-      }]
+      },
+      {
+        title: 'Historique',
+        caption: null,
+        icon: 'mdi-calendar',
+        link: `/historique-retraits`,
+      },
+    ]
   },
   {
-    title: 'Paramètres',
-    caption: 'forum.quasar.dev',
+    title: 'Administration',
+    caption: 'administrer votre compte',
     icon: 'mdi-cog',
     link: '/offres_senac',
     open: false,
     subItems: [
       {
-        title: 'Gestion des utilisateurs',
-        caption: 'Détails des offres',
-        icon: 'mdi-user',
-        link: '/offres_senac',
-      },
-      {
         title: 'Gestion du compte',
         caption: '',
         icon: 'mdi-account',
-        link: '/contact_senac',
+        link: '/compte',
       },
     ]
+  },
+  {
+    title: 'Déconnecter',
+    caption: 'Fermer session',
+    icon: 'mdi-logout',
+    link: '/logout',
+    open: false,
   }
 ]
 
@@ -167,6 +179,7 @@ export default defineComponent({
 
     return {
       alert: ref(false),
+      solde: ref(0),
       today: today,
       essentialLinks: linksList,
       leftDrawerOpen,
@@ -174,6 +187,22 @@ export default defineComponent({
         leftDrawerOpen.value = !leftDrawerOpen.value
       }
     }
+  },
+  methods: {
+    actualiserSolde(){
+      if (this.isLoggedIn){
+        this.$axios.get('compte')
+          .then(response => {
+            if (response.isSuccessful()){
+              this.solde = response.getData().solde
+            }
+          })
+      }
+    }
+  },
+  mounted() {
+    this.actualiserSolde();
+    setInterval(()=>{ this.actualiserSolde()}, 50000)
   }
 })
 </script>

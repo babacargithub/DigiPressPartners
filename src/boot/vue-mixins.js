@@ -2,6 +2,7 @@ import { boot } from 'quasar/wrappers'
 import swal from "sweetalert";
 import loginCredentials from "src/repository/LoginCredentials";
 import Acheter from "pages/paiements/Acheter.vue";
+import {BASE_URL} from "boot/axios";
 // "async" is optional;
 // more info on params: https://v2.quasar.dev/quasar-cli/boot-files
 export default boot( ( { app, store} ) => {
@@ -9,8 +10,8 @@ export default boot( ( { app, store} ) => {
   app.mixin({
     data() {
       return {
-        isConnected: true,
-        isLoggedIn: true
+        isConnected: loginCredentials.isConnected(),
+        isLoggedIn: loginCredentials.isConnected()
       };
     },
     methods: {
@@ -55,6 +56,9 @@ export default boot( ( { app, store} ) => {
           component: Acheter,
           componentProps: propsArgs
         })
+      },
+      resolveImageUrl(url){
+        return BASE_URL+url;
       }
     },
 
