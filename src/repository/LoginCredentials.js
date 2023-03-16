@@ -17,12 +17,11 @@
     }
     setAsLoggedIn() {
         localStorage.setItem('est_connecte',"1")
+        localStorage.setItem('is_logged_in',"1")
     }
     logout() {
-        localStorage.removeItem('client')
-        localStorage.removeItem('client_id')
-        localStorage.removeItem('est_connecte')
-        localStorage.setItem('est_connecte',"0")
+      localStorage.setItem('est_connecte',"0")
+      localStorage.setItem('is_logged_in',"0")
 
     }
     isConnected(){

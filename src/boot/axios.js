@@ -11,8 +11,8 @@ import loginCredentials from "src/repository/LoginCredentials";
 // "export default () => {}" function below (which runs individually
 // for each client)
 
-export const BASE_URL =  process.env.NODE_ENV === "development" ? "http://localhost:8888/DigiPress/DigiPressBackend/public/" : "https://digipress.golobone.net/"
-const api = axios.create({ baseURL: 'https://admin.senapel.com/api/' })
+export const BASE_URL =  process.env.NODE_ENV === "development" ? "http://localhost:8888/DigiPress/DigiPressBackend/public/" : "https://app.digipress.pro/"
+const api = axios.create({ baseURL: 'https://app.digipress.pro/' })
 export let partnersConfig = {
   // baseURL: process.env.NODE_ENV === "development"?'http://localhost/senapel/public/api/':'https://golobone.net/go_travel_v4/public/api/'
   baseURL: BASE_URL+'partners/'

@@ -3,14 +3,14 @@ import {LocalStorage} from "quasar";
 export const user_login = {
   namespaced: true,
   state: {
-    isLoggedIn: false,
+    isLoggedIn: Boolean(localStorage.getItem("is_logged_in")),
     shouldChangePassword: false,
     user: {
       id:null,
       isAdmin: false,
       isSuperAdmin: false,
       isCEO: true,
-      token: null,
+      token: String(localStorage.getItem("token")),
       username:'',
       balance: null,
       roles: []
@@ -45,21 +45,20 @@ export const user_login = {
   mutations: {
     markAsLoggedIn(state) {
       state.isLoggedIn = true;
-      localStorage.setItem("isLoggedIn","0")
+      localStorage.setItem("is_logged_in","1")
     },
 
     markAsLoggedOut(state) {
+      localStorage.setItem("is_logged_in","0")
+      localStorage.setItem("token","")
       state.isLoggedIn = false;
+
     },
     mutateToken(state, token) {
       state.user.token = token;
       localStorage.setItem("token", token)
     },mutateUsername(state, username) {
       state.user.username = username;
-    },mutateBalance(state, balance) {
-      state.user.balance = balance;
-    },mutateRoles(state, roles) {
-      state.user.roles = roles;
     },mutateId(state, id) {
       state.user.id = id;
     }, mutateShouldChangePassword(state, bool) {

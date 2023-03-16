@@ -11,6 +11,9 @@ const routes = [
         path: 'login', component: () => import('pages/users/Login.vue'),
       },
       {
+        path: 'logout', component: () => import('pages/users/Logout.vue'),
+      },
+      {
         path: 'ventes_du_jour', component: () => import('pages/ventes/VenteDuJour.vue'),
       },
       {

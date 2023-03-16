@@ -88,6 +88,8 @@ export default defineComponent({
             this.$store.dispatch('user_login/saveUserCredentials', user )
             this.$store.dispatch("user_login/loginUser")
             loginCredentials.setAsLoggedIn();
+            this.isLoggedIn = true
+            this.isConnected = true
 
             this.$router.push("/");
           }else {

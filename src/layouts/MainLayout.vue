@@ -24,7 +24,7 @@
       v-model="leftDrawerOpen"
       show-if-above
       bordered
-      v-if="isLoggedIn"
+      v-if="$store.state.user_login.isLoggedIn"
     >
       <q-item-label
         header
@@ -147,7 +147,7 @@ const linksList = [
     title: 'Administration',
     caption: 'administrer votre compte',
     icon: 'mdi-cog',
-    link: '/offres_senac',
+    link: '/admin',
     open: false,
     subItems: [
       {
@@ -163,7 +163,16 @@ const linksList = [
     caption: 'Fermer session',
     icon: 'mdi-logout',
     link: '/logout',
-    open: false,
+    open: true,
+
+    subItems: [
+      {
+        title: 'Fermer votre session',
+        caption: '',
+        icon: 'mdi-logout',
+        link: '/logout',
+      },
+    ]
   }
 ]
 
